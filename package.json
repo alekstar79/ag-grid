@@ -38,7 +38,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:pages": "vite build --mode pages",
-    "preview": "vite preview --mode pages"
+    "preview": "vite preview"
   },
   "dependencies": {
     "ag-grid-community": "^31.3.4",
