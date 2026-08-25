@@ -23,6 +23,8 @@
 import { inject, ref, shallowRef, computed } from 'vue'
 import { AgGridVue } from 'ag-grid-vue3'
 import type { ColDef, GridApi, GridReadyEvent, HeaderValueGetterParams } from 'ag-grid-community'
+import { AG_GRID_LOCALE_EN } from '@/locale/en'
+import { AG_GRID_LOCALE_RU } from '@/locale/ru'
 
 const emit = defineEmits<{ (e: 'log', message: string): void }>()
 const onGridReadyHandler = inject<() => void>('onGridReady')
@@ -32,62 +34,26 @@ const savedLang = (sessionStorage.getItem(STORAGE_KEY) as 'ru' | 'en') || 'ru'
 
 const lang = ref<'ru' | 'en'>(savedLang)
 
+const customRu = {
+  'column.id': 'ID',
+  'column.name': 'Имя',
+  'column.age': 'Возраст',
+  'column.salary': 'Зарплата',
+  'data.employee': 'Сотрудник'
+}
+
+const customEn = {
+  'column.id': 'ID',
+  'column.name': 'Name',
+  'column.age': 'Age',
+  'column.salary': 'Salary',
+  'data.employee': 'Employee'
+}
+
 // Словарь переводов
 const translations: Record<string, Record<string, string>> = {
-  ru: {
-    'page': 'Страница',
-    'of': 'из',
-    'to': 'по',
-    'loadingOoo': 'Загрузка...',
-    'noRowsToShow': 'Нет данных',
-    'filterOoo': 'Фильтр...',
-    'equals': 'Равно',
-    'notEqual': 'Не равно',
-    'contains': 'Содержит',
-    'startsWith': 'Начинается с',
-    'endsWith': 'Заканчивается',
-    'lessThan': 'Меньше',
-    'greaterThan': 'Больше',
-    'lessThanOrEqual': 'Меньше или равно',
-    'greaterThanOrEqual': 'Больше или равно',
-    'inRange': 'В диапазоне',
-    'searchOoo': 'Поиск...',
-    'selectAll': 'Выбрать все',
-    'copy': 'Копировать',
-    'export': 'Экспорт',
-    'column.id': 'ID',
-    'column.name': 'Имя',
-    'column.age': 'Возраст',
-    'column.salary': 'Зарплата',
-    'data.employee': 'Сотрудник'
-  },
-  en: {
-    'page': 'Page',
-    'of': 'of',
-    'to': 'to',
-    'loadingOoo': 'Loading...',
-    'noRowsToShow': 'No rows to show',
-    'filterOoo': 'Filter...',
-    'equals': 'Equals',
-    'notEqual': 'Not equal',
-    'contains': 'Contains',
-    'startsWith': 'Starts with',
-    'endsWith': 'Ends with',
-    'lessThan': 'Less than',
-    'greaterThan': 'Greater than',
-    'lessThanOrEqual': 'Less than or equal',
-    'greaterThanOrEqual': 'Greater than or equal',
-    'inRange': 'In range',
-    'searchOoo': 'Search...',
-    'selectAll': 'Select all',
-    'copy': 'Copy',
-    'export': 'Export',
-    'column.id': 'ID',
-    'column.name': 'Name',
-    'column.age': 'Age',
-    'column.salary': 'Salary',
-    'data.employee': 'Employee'
-  }
+  ru: { ...AG_GRID_LOCALE_RU, ...customRu },
+  en: { ...AG_GRID_LOCALE_EN, ...customEn },
 }
 
 // Текущий словарь
