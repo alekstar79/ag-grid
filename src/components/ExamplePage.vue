@@ -44,6 +44,7 @@
 <script setup lang="ts">
 import { ref, provide } from 'vue'
 import CodeBlock from './CodeBlock.vue'
+import 'ag-grid-enterprise'
 
 defineProps<{
   title: string
