@@ -1,17 +1,26 @@
 <template>
+  <div class="controls">
+    <button @click="deselectRows">Deselect Rows</button>
+  </div>
+
   <AgGridVue
     style="width: 100%; height: 100%"
     :rowData="rowData"
     :columnDefs="columnDefs"
     :animateRows="true"
+    rowSelection="multiple"
     @grid-ready="onGridReady"
+    @cell-clicked="cellClicked"
   />
 </template>
 
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue'
+import { inject, ref, shallowRef } from 'vue'
+import type { ColDef, GridReadyEvent, GridApi } from 'ag-grid-community'
 import { AgGridVue } from 'ag-grid-vue3'
-import type { ColDef, GridReadyEvent } from 'ag-grid-community'
+
+const emit = defineEmits<{ (e: 'log', message: string): void }>()
+const onGridReadyHandler = inject<() => void>('onGridReady')
 
 interface Employee {
   id: number
@@ -22,6 +31,8 @@ interface Employee {
   status: 'active' | 'fired'
   hired: string
 }
+
+const gridApi = ref<GridApi | null>(null)
 
 const rowData = ref<Employee[]>([
   { id: 1, firstName: 'Иван', lastName: 'Петров', age: 32, salary: 220000, status: 'active', hired: '2021-03-01' },
@@ -40,10 +51,39 @@ const columnDefs = shallowRef<ColDef[]>([
 ])
 
 function onGridReady(params: GridReadyEvent) {
+  gridApi.value = params.api
   params.api.sizeColumnsToFit()
+
+  if (onGridReadyHandler) {
+    onGridReadyHandler()
+  }
+}
+
+function cellClicked(e) {
+  emit('log', JSON.stringify(e.data, null, 2))
+}
+
+function deselectRows() {
+  gridApi.value?.deselectAll()
 }
 </script>
 
 <style scoped>
-/* любые стили, если нужны */
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+  flex-shrink: 0;
+}
+.controls button {
+  padding: 6px 14px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.controls button:hover {
+  background: #e2e8f0;
+}
 </style>

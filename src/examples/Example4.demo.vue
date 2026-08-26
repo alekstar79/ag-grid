@@ -9,11 +9,12 @@
     :columnDefs="columnDefs"
     :defaultColDef="defaultColDef"
     :context="context"
-    rowSelection="single"
     :animateRows="true"
-    @grid-ready="onGridReady"
+    rowSelection="single"
+    rowGroupPanelShow="onlyWhenGrouping"
     @cell-value-changed="onCellValueChanged"
     @selection-changed="onSelectionChanged"
+    @grid-ready="onGridReady"
   />
 </template>
 
@@ -73,7 +74,12 @@ const columnDefs = shallowRef<ColDef[]>([
   }
 ])
 
-const defaultColDef = shallowRef<ColDef>({ sortable: true, resizable: true, filter: true })
+const defaultColDef = shallowRef<ColDef>({
+  enableRowGroup: true,
+  sortable: true,
+  resizable: true,
+  filter: true
+})
 
 let gridApi: GridApi | null = null
 

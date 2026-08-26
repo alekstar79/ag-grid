@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import { inject, ref, shallowRef } from 'vue'
-import { AgGridVue } from 'ag-grid-vue3'
 import type { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community'
+import { AgGridVue } from 'ag-grid-vue3'
 
 const emit = defineEmits<{ (e: 'log', message: string): void }>()
 const onGridReadyHandler = inject<() => void>('onGridReady')
@@ -49,12 +49,21 @@ const columnDefs = shallowRef<ColDef[]>([
   { field: 'firstName', headerName: 'Имя', comparator: ruComparator },
   { field: 'lastName', headerName: 'Фамилия', comparator: ruComparator },
   { field: 'age', headerName: 'Возраст', comparator: numComparator },
-  { field: 'salary', headerName: 'Зарплата', comparator: numComparator, valueFormatter: p => p.value ? `${p.value.toLocaleString('ru-RU')} ₽` : '' },
+  {
+    field: 'salary',
+    headerName: 'Зарплата',
+    comparator: numComparator,
+    valueFormatter: p => p.value ? `${p.value.toLocaleString('ru-RU')} ₽` : '',
+  },
   { field: 'status', headerName: 'Статус' },
   { field: 'hired', headerName: 'Дата приема' },
 ])
 
-const defaultColDef = shallowRef<ColDef>({ sortable: true, resizable: true, filter: true })
+const defaultColDef = shallowRef<ColDef>({
+  resizable: true,
+  sortable: true,
+  filter: true
+})
 
 let gridApi: GridApi | null = null
 
@@ -71,14 +80,17 @@ function sortSalaryDesc() {
   gridApi?.applyColumnState({ state: [{ colId: 'salary', sort: 'desc' }], defaultState: { sort: null } })
   emit('log', 'Сортировка по зарплате ↓')
 }
+
 function sortSalaryAsc() {
   gridApi?.applyColumnState({ state: [{ colId: 'salary', sort: 'asc' }], defaultState: { sort: null } })
   emit('log', 'Сортировка по зарплате ↑')
 }
+
 function resetSorting() {
   gridApi?.applyColumnState({ defaultState: { sort: null } })
   emit('log', 'Сортировка сброшена')
 }
+
 function logSortState() {
   const state = gridApi?.getColumnState() ?? []
   const sorting = state.filter(col => col.sort)

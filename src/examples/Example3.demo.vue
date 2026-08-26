@@ -8,6 +8,8 @@
     </select>
     <button @click="resetFilters">Сбросить все фильтры</button>
     <button @click="logFilterModel">Показать модель фильтров</button>
+    <button @click="saveFilterModel">Сохранить фильтр</button>
+    <button @click="applyFilterModel">Применить фильтр</button>
   </div>
 
   <AgGridVue
@@ -18,6 +20,7 @@
     :isExternalFilterPresent="isExternalFilterPresent"
     :doesExternalFilterPass="doesExternalFilterPass"
     :animateRows="true"
+    :popupParent="popupParent"
     @grid-ready="onGridReady"
     @filter-changed="onFilterChanged"
   />
@@ -25,8 +28,8 @@
 
 <script setup lang="ts">
 import { inject, ref, shallowRef } from 'vue'
+import type { ColDef, GridApi, GridReadyEvent, FilterModel } from 'ag-grid-community'
 import { AgGridVue } from 'ag-grid-vue3'
-import type { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community'
 
 const emit = defineEmits<{ (e: 'log', message: string): void }>()
 const onGridReadyHandler = inject<() => void>('onGridReady')
@@ -40,6 +43,8 @@ interface Employee {
   status: 'active' | 'fired'
   hired: string
 }
+
+const popupParent = document.body // null
 
 const rowData = ref<Employee[]>([
   { id: 1, firstName: 'Иван', lastName: 'Петров', age: 32, salary: 220000, status: 'active', hired: '2021-03-01' },
@@ -65,8 +70,9 @@ const defaultColDef = shallowRef<ColDef>({
   floatingFilter: true,
 })
 
-let gridApi: GridApi | null = null
 const statusFilter = ref<'all' | 'active' | 'fired'>('all')
+const savedFilterModel = ref<FilterModel | null>(null)
+let gridApi: GridApi | null = null
 
 function onGridReady(params: GridReadyEvent) {
   gridApi = params.api
@@ -80,6 +86,7 @@ function onGridReady(params: GridReadyEvent) {
 let qTimeout: ReturnType<typeof setTimeout>
 function onQuickFilter(e: Event) {
   const val = (e.target as HTMLInputElement).value
+
   clearTimeout(qTimeout)
   qTimeout = setTimeout(() => {
     gridApi?.setGridOption('quickFilterText', val)
@@ -90,9 +97,11 @@ function onQuickFilter(e: Event) {
 function isExternalFilterPresent() {
   return statusFilter.value !== 'all'
 }
+
 function doesExternalFilterPass(node: any) {
   return statusFilter.value === 'all' || node.data?.status === statusFilter.value
 }
+
 function applyExternalFilter() {
   gridApi?.onFilterChanged();
   emit('log', `External filter: ${statusFilter.value}`)
@@ -101,17 +110,34 @@ function applyExternalFilter() {
 function resetFilters() {
   gridApi?.setFilterModel(null)
   gridApi?.setGridOption('quickFilterText', '')
+
   statusFilter.value = 'all'
+
   const input = document.querySelector('.controls input') as HTMLInputElement
+
   if (input) input.value = ''
+
   gridApi?.onFilterChanged()
   emit('log', 'Все фильтры сброшены')
+}
+
+function saveFilterModel() {
+  const model = gridApi?.getFilterModel() ?? null
+  emit('log', `Save filter model: ${JSON.stringify(model, null, 2)}`)
+  savedFilterModel.value = model
+}
+
+function applyFilterModel() {
+  const model = savedFilterModel.value
+  emit('log', `Apply filter model: ${JSON.stringify(model, null, 2)}`)
+  gridApi?.setFilterModel(model)
 }
 
 function logFilterModel() {
   const model = gridApi?.getFilterModel()
   emit('log', `Модель фильтров: ${JSON.stringify(model, null, 2)}`)
 }
+
 function onFilterChanged() {
   emit('log', 'Фильтры изменены (событие)')
 }

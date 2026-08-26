@@ -123,7 +123,7 @@ const menuItems = [
   transform: translateY(-50%);
   width: 28px;
   height: 48px;
-  background: white;
+  background: #1e293b;
   border: 1px solid #e2e8f0;
   border-left: none;
   border-radius: 0 8px 8px 0;
@@ -139,8 +139,7 @@ const menuItems = [
 }
 
 .toggle-btn:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  color: #b2b8c5;
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -158,6 +157,25 @@ const menuItems = [
   overflow-y: auto;
   padding: 16px 8px;
 }
+
+.nav::-webkit-scrollbar {
+  width: 6px; /* Ширина полосы */
+  background-color: #1e293b; /* Цвет фона полосы */
+}
+
+.nav::-webkit-scrollbar-track {
+  background-color: #1e293b; /* Цвет дорожки */
+  border-radius: 4px; /* Скруглённые углы */
+}
+
+.nav::-webkit-scrollbar-thumb {
+  background-color: #959797; /* Базовый цвет ползунка */
+  border-radius: 4px;
+}
+
+/* .nav::-webkit-scrollbar-thumb:hover {
+  background-color: #0d9090;
+} */
 
 .nav ul {
   list-style: none;

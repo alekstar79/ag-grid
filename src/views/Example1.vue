@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import ConsoleOutput from '@/components/ConsoleOutput.vue'
 import ExamplePage from '@/components/ExamplePage.vue'
 import DemoComponent from '@/examples/Example1.demo.vue'
 import demoCode from '@/examples/Example1.demo.vue?raw'
+
+const logs = ref<string[]>([])
+function onLog(message: string) {
+  logs.value.push(`[${new Date().toLocaleTimeString()}] ${message}`)
+}
 
 const pageTitle = 'Сотрудники'
 const pageDescription = 'Пример базовой таблицы с данными сотрудников. Используются стандартные колонки с фильтрацией и сортировкой (включены по умолчанию в ag-grid).'
@@ -13,8 +20,12 @@ const pageDescription = 'Пример базовой таблицы с данн�
     :description="pageDescription"
     :code="demoCode"
     language="html"
+    @log="onLog"
   >
-    <DemoComponent />
+    <DemoComponent @log="onLog" />
+    <template #console>
+      <ConsoleOutput :logs="logs" />
+    </template>
   </ExamplePage>
 </template>
 
