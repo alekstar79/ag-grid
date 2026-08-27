@@ -23,7 +23,11 @@ const menuItems = [
   { path: '/example/11', title: 'Кастомный editor', icon: '✏️' },
   { path: '/example/12', title: 'Pagination', icon: '📄' },
   { path: '/example/13', title: 'Keyboard Nav', icon: '⌨️' },
-  { path: '/example/14', title: 'Localisation', icon: '🌍' }
+  { path: '/example/14', title: 'Localisation', icon: '🌍' },
+  { path: '/example/15', title: 'Группировка', icon: '📊' },
+  { path: '/example/16', title: 'Мастер/Детали', icon: '🧩' },
+  { path: '/example/17', title: 'Выделение диапазона', icon: '📋' },
+  { path: '/example/18', title: 'Сводная таблица', icon: '🔄' }
 ]
 </script>
 

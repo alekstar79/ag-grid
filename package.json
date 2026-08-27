@@ -41,6 +41,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ag-grid-enterprise/range-selection": "^31.3.4",
     "ag-grid-community": "^31.3.4",
     "ag-grid-enterprise": "^31.3.4",
     "ag-grid-vue3": "^31.3.4",

@@ -20,8 +20,8 @@
 
 <script setup lang="ts">
 import { inject, ref, shallowRef } from 'vue'
-import { AgGridVue } from 'ag-grid-vue3'
 import type { ColDef, GridApi, GridReadyEvent } from 'ag-grid-community'
+import { AgGridVue } from 'ag-grid-vue3'
 
 /**
  * Назначение: показывает, как использовать applyTransaction для точечного добавления,

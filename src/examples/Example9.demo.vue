@@ -15,16 +15,9 @@
 </template>
 
 <script setup lang="ts">
-import {inject, shallowRef} from 'vue'
-import {AgGridVue} from 'ag-grid-vue3'
-import type {
-  ColDef,
-  FilterChangedEvent,
-  GridApi,
-  GridReadyEvent,
-  IDatasource,
-  SortChangedEvent
-} from 'ag-grid-community'
+import { inject, shallowRef } from 'vue'
+import type { ColDef, FilterChangedEvent, GridApi, GridReadyEvent, IDatasource, SortChangedEvent } from 'ag-grid-community'
+import { AgGridVue } from 'ag-grid-vue3'
 
 /**
  * Infinite Row Model — данные подгружаются блоками при прокрутке.

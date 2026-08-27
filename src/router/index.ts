@@ -88,6 +88,30 @@ const routes: RouteRecordRaw[] = [
     name: 'Example14',
     component: () => import('@/views/Example14.vue'),
     meta: { title: 'Localisation' }
+  },
+  {
+    path: '/example/15',
+    name: 'Example15',
+    component: () => import('@/views/Example15.vue'),
+    meta: { title: 'Группировка и агрегация' }
+  },
+  {
+    path: '/example/16',
+    name: 'Example16',
+    component: () => import('@/views/Example16.vue'),
+    meta: { title: 'Мастер/Детали' }
+  },
+  {
+    path: '/example/17',
+    name: 'Example17',
+    component: () => import('@/views/Example17.vue'),
+    meta: { title: 'Выделение диапазона' }
+  },
+  {
+    path: '/example/18',
+    name: 'Example18',
+    component: () => import('@/views/Example18.vue'),
+    meta: { title: 'Сводная таблица' }
   }
 ]
 

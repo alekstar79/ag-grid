@@ -21,8 +21,8 @@
 
 <script setup lang="ts">
 import { inject, ref, shallowRef, computed } from 'vue'
-import { AgGridVue } from 'ag-grid-vue3'
 import type { ColDef, GridApi, GridReadyEvent, HeaderValueGetterParams } from 'ag-grid-community'
+import { AgGridVue } from 'ag-grid-vue3'
 import { AG_GRID_LOCALE_EN } from '@/locale/en'
 import { AG_GRID_LOCALE_RU } from '@/locale/ru'
 

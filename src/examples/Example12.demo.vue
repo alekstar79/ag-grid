@@ -23,8 +23,8 @@
 
 <script setup lang="ts">
 import { inject, ref, shallowRef } from 'vue'
-import { AgGridVue } from 'ag-grid-vue3'
 import type { ColDef, GridApi, GridReadyEvent, FirstDataRenderedEvent, PaginationChangedEvent } from 'ag-grid-community'
+import { AgGridVue } from 'ag-grid-vue3'
 
 const emit = defineEmits<{ (e: 'log', message: string): void }>()
 const onGridReadyHandler = inject<() => void>('onGridReady')
