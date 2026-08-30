@@ -3044,22 +3044,7 @@ const defaultColDef = {
 
 ---
 
-# 31. Русскоязычные материалы
-
-Официальная документация AG Grid - на английском. Ниже приводятся русскоязычные ресурсы
-и поисковые выдачи, которые можно использовать дополнительно.
-
-## Статьи и примеры на русском
-
-Поиск по Habr:
-
-AG Grid:
-
-https://habr.com/ru/search/?q=AG+Grid&target_type=posts&order=relevance
-
----
-
-# 32. Финальный чек-лист
+# 31. Финальный чек-лист
 
 ## База
 
@@ -3143,16 +3128,16 @@ https://habr.com/ru/search/?q=AG+Grid&target_type=posts&order=relevance
 
 ---
 
-# 33. Оценка уровня компетенций
+# 32. Оценка уровня компетенций
 
 На позицию Vue.js Developer по AG Grid:
 
-## Junior/Middle уровень
+## Junior/Middle
 
 Кандидат может вывести таблицу, знает `rowData`, `columnDefs`, умеет делать
 простые сортировки и фильтры, но теряется в API и производительности.
 
-## Хороший Middle+/Senior
+## Middle+/Senior
 
 Кандидат:
 - уверенно использует `gridApi`;
@@ -3162,7 +3147,7 @@ https://habr.com/ru/search/?q=AG+Grid&target_type=posts&order=relevance
 - знает, как обновлять данные через transaction;
 - понимает разницу row models.
 
-## Сильный Senior
+## Senior
 
 Кандидат:
 - понимает, что и когда выполнять на клиенте, а что на сервере;
