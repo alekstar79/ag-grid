@@ -30,7 +30,7 @@
 | 5 | Cell renderer, cell editor, редактирование, события                                         |
 | 6 | Selection, pagination, export CSV, сохранение состояния                                     |
 
-## Часть 2 - продвинутый AG Grid и собеседование
+## Часть 2 - продвинутый AG Grid
 
 Цель: понимать большие данные, row models, группировку, tree, master/detail, производительность.
 
@@ -261,8 +261,6 @@ gridApi // управление состоянием грида
 - side bar;
 - status bar;
 - row dragging.
-
-На собеседовании хороший тон — сказать:
 
 > «Перед использованием grouping, tree data, set filter, server-side row model и Excel export нужно проверить, подключена ли AG Grid Enterprise license».
 
@@ -2071,9 +2069,8 @@ function resetGridState() {
 }
 ```
 
-Хороший ответ на собеседовании:
-
-> `getColumnState` хранит порядок, ширину, видимость, sort, agg, pivot и другие параметры колонок. `getFilterModel` хранит filter model. Их можно сохранять в localStorage, URL или backend.
+> `getColumnState` хранит порядок, ширину, видимость, sort, agg, pivot и другие параметры колонок.
+> `getFilterModel` хранит filter model. Их можно сохранять в localStorage, URL или backend.
 
 ---
 
@@ -2729,7 +2726,7 @@ const sideBar = {
 
 ---
 
-# 30. Вопросы собеседования с ответами
+# 30. Ответы на вопросы
 
 ## Вопрос 1. Что такое AG Grid и чем он отличается от обычной таблицы?
 
@@ -3129,8 +3126,6 @@ const defaultColDef = {
 ---
 
 # 32. Оценка уровня компетенций
-
-На позицию Vue.js Developer по AG Grid:
 
 ## Junior/Middle
 
